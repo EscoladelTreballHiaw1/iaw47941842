@@ -1,7 +1,7 @@
 /*
  * Bicycle.java
  * 
- * Copyright 2010-2012 Mònica Ramírez Arceda <mramirez@escoladeltreball.org>
+ * Copyright 2010-2012 Jordi Capellades EDo <jordiedo29@gmail.com>
  * 
  * This is free software, licensed under the GNU General Public License v3.
  * See http://www.gnu.org/licenses/gpl.html for more information.
