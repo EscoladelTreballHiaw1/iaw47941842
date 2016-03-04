@@ -1,178 +1,162 @@
-/*
- * Bicycle.java
- * 
- * Copyright 2010-2012 Mònica Ramírez Arceda <mramirez@escoladeltreball.org>
- * 
- * This is free software, licensed under the GNU General Public License v3.
- * See http://www.gnu.org/licenses/gpl.html for more information.
- */
-
-package bicycle;
-
 /**
- * Modelizes a bicycle.
- * 
- * A bicycle has a model, rear and front sprockets that may be changed if the bicycle is moving and can be accelerated
- * or braked. The minimum rear and front sprockets have number 1. The second rear and front sprockets have number 2 and
- * so on.
+ *
+ *
  */
 public class Bicycle {
-
-    /** The bicycle's model. */
+    
+    /**model de la bicicleta. */
     private String model;
-    /** The engaged front sprocket. */
-    private int frontSprocket;
-    /** The engaged rear sprocket. */
-    private int rearSprocket;
-    /** The number of front sprockets the bicyle has. */
-    private final int nFrontSprockets;
-    /** The number of rear sprockets the bicyle has. */
-    private final int nRearSprockets;
-    /** The bicycle's speed in km/h. */
-    private double v;
-    /** The maximum speed of the bicycle */
+    /**plat determinat. */
+    private int plat;
+    /**pinyo determinat. */
+    private int pinyo;
+    /**número de plats. */
+    private final int nPlats;
+    /**número de pinyos. */
+    private final int nPinyons;
+    /**velocitat en km/h. */
+    private int v;
+    /**velocitat maxima. */
     private final static int VMAX = 100;
-    /** Increment of the bicycle speed */
+    /**increment de la velocitat. */ 
     private final static int DV = 5;
-
-    /**
-     * Constructor by default. Creates a stopped mountain bike with 3 front sprockets, 7 rear sprockets and with the
-     * first front and rear sprockets engaged.
-     */
+    
+    //CONSTRUCTORS
+    
     public Bicycle() {
         this.model = "Mountain bike";
-        this.frontSprocket = 3;
-        this.rearSprocket = 1;
-        this.nFrontSprockets = 3;
-        this.nRearSprockets = 7;
+        this.plat = 3;
+        this.pinyo = 1;
+        this.nPlats = 3;
+        this.nPinyons = 7;
         this.v = 0;
     }
-
-    /**
-     * Constructor. Creates a mountain bike with the first rear sprocket engaged and the last front sprocket engaged
-     * 
-     * @param nFrontSprockets The number of front sprockets of the bicycle.
-     * @param nRearSprockets the number of rear sprockets of the bicycle..
-     * @param v The bicycle's speed in km/h.
-     */
-    public Bicycle(int nFrontSprockets, int nRearSprockets, double v) {
+    
+    public Bicycle(int nPlats, int nPinyons, int v) {
         this.model = "Mountain bike";
-        this.nFrontSprockets = nFrontSprockets;
-        this.nRearSprockets = nRearSprockets;
-        this.frontSprocket = nFrontSprockets;
-        this.rearSprocket = 1;
+        this.plat = plat;
+        this.pinyo = pinyo;
+        this.nPlats = nPlats;
+        this.nPinyons = nPinyons;
         this.v = v;
     }
-
-    /**
-     * Constructor.
-     * 
-     * @param model The bicycle's model.
-     * @param frontSprocket The engaged front sprocket.
-     * @param rearSprocket The rear front sprocket.
-     * @param nFrontSprockets The number of front sprockets the bicyle has.
-     * @param nRearSprockets The number of rear sprockets the bicyle has.
-     * @param v The bicycle's speed in km/h.
-     */
-    public Bicycle(String model, int frontSprocket, int rearSprocket, int nFrontSprockets, int nRearSprockets, double v) {
+    
+    public Bicycle(String model, int plat, int pinyo, int nPlats, int nPinyons, int v) {
         this.model = model;
-        this.frontSprocket = frontSprocket;
-        this.rearSprocket = rearSprocket;
-        this.nFrontSprockets = nFrontSprockets;
-        this.nRearSprockets = nRearSprockets;
+        this.plat = plat;
+        this.pinyo = pinyo;
+        this.nPlats = nPlats;
+        this.nPinyons = nPinyons;
         this.v = v;
     }
-
-    /**
-     * Changes the engaged front sprocket. Increases or decreases the front sprocket by 1. The bicycle can't be stopped.
-     * 
-     * @param n A number that indicates if the front sprocket must be increased or decreased. If n is positive the front
-     *        sprocket will be increased. If n is negative the front sprocket will be decreased. If n is 0, the front
-     *        sprocket won't be changed.
-     * @return true if the front sprocket is changed, false otherwise.
-     */
-    public boolean changeFrontSprocket(int n) {
-        boolean isChanged = true;
-        if (this.frontSprocket < this.nFrontSprockets && n > 0 && this.v > 0) {
-            this.frontSprocket++;
-        } else if (this.frontSprocket > 1 && n < 0 && this.v > 0) {
-            this.frontSprocket--;
-        } else {
-            isChanged = false;
-        }
-        return isChanged;
-    }
-
-    /**
-     * Changes the engaged rear sprocket. Increases or decreases the rear sprocket by 1. The bicycle can't be stopped.
-     * 
-     * @param n A number that indicates if the rear sprocket must be increased or decreased. If n is positive the rear
-     *        sprocket will be increased. If n is negative the rear sprocket will be decreased. If n is 0, the rear
-     *        sprocket won't be changed.
-     * @return true if the rear sprocket is changed, false otherwise.
-     */
-    public boolean changeRearSprocket(int num) {
-        boolean isChanged = true;
-        if (rearSprocket < nRearSprockets && num > 0 && v > 0) {
-            rearSprocket++;
-        } else if (rearSprocket > 1 && num < 0 && v > 0) {
-            rearSprocket--;
-        } else {
-            isChanged = false;
-        }
-        return isChanged;
-    }
-
-    /**
-     * Accelerates the bicycle.
-     */
-    public void accelerate() {
-        double newV = this.v + Bicycle.DV;
-        if (newV > Bicycle.VMAX)
-            newV = Bicycle.VMAX;
-        this.v = newV;
-    }
-
-    /**
-     * Decreases the velocity of the bicycle.
-     */
-    public void brake() {
-        double newV = this.v - Bicycle.DV;
-        if (newV < 0)
-            newV = 0;
-        this.v = newV;
-    }
-
-    // Setter and getters
+    
+    // SETTER AND GETTERS
+    
+    //model
+    
     public String getModel() {
         return model;
     }
-
+    
     public void setModel(String model) {
-        this.model = model.trim();
+        this.model = model;
     }
-
-    public int getRearSprocket() {
-        return rearSprocket;
+    
+    //plat
+    
+    public int getPlat() {
+        return plat;
     }
-
-    public void setRearSprocket(int rearSprocket) {
-        this.rearSprocket = rearSprocket;
+    
+    public void setPlat(int plat) {
+        this.plat = plat;
     }
-
-    public int getFrontSprocket() {
-        return frontSprocket;
+    
+    //pinto
+    
+    public int getPinyo() {
+        return pinyo;
     }
-
-    public void setFrontSprocket(int frontSprocket) {
-        this.frontSprocket = frontSprocket;
+    
+    public void setPinyo(int pinyo) {
+        this.pinyo = pinyo;
     }
-
+    
+    //nplats
+    
+    public int getnPlats() {
+        return nPlats;
+    }
+    
+    //npinyons
+    
+    public int nPinyons() {
+        return nPinyons;
+    }
+    
+    //velocitat
+    
+    
     public double getV() {
         return v;
     }
-
-    public void setV(double v) {
+    
+    public void setV(int v) {
         this.v = v;
     }
+    
+    //METODES ACCELARAR
+    
+    //accelerar
+    public void accelara() {
+        
+        if (v < 100) {
+            int velocitat = this.v;
+            velocitat = velocitat + this.DV;
+            this.v = velocitat;
+        }
+    }
+    
+    //frenar
+    public void fenar() {
+        
+        if (v < 0) {
+            int velocitat = this.v;
+            velocitat = velocitat - this.DV;
+            this.v = velocitat;
+        }
+    }
+    
+    //canviPinyo
+    public boolean canviPlat(int n) {
+        boolean canvi = true;
+        
+        if (this.v > 0) {
+            if (this.plat < this.nPlats && n > 0 && this.v > 0) {
+                this.plat++;
+            } else if (this.plat > 1 && n < 0 && this.v > 0) {
+                this.plat--;
+            } else {
+                canvi = false;
+            }
+                   
+        } 
+         return canvi;  
+    }
+    
+    public boolean canviPinyo(int num) {
+        boolean canvi = true;
+        
+        if (this.v > 0) {
+            if (this.pinyo < this.nPinyons && num > 0 && this.v > 0) {
+                this.pinyo++;
+            } else if (this.pinyo > 1 && num < 0 && this.v > 0) {
+                this.pinyo--;
+            } else {
+                canvi = false;
+            }
+                      
+        }  
+        return canvi;
+    }  
 }
