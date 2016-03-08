@@ -7,7 +7,7 @@
  * See http://www.gnu.org/licenses/gpl.html for more information.
  */
 
-package bicycle;
+package iaw47941842;
 
 /**
  * Modelizes a bicycle.
@@ -187,11 +187,6 @@ public class Bicycle1 {
 
     public double getV() {
         return v;
-    }
-    
-    public void stop(){
-        this.v = 0;
-        
     }
 
     public void setV(double v) {
